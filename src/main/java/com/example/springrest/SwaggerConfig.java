@@ -3,6 +3,7 @@ package com.example.springrest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -19,6 +20,12 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
 		return new Docket(DocumentationType.SWAGGER_2).select()
 				.apis(RequestHandlerSelectors.basePackage("com.example.springrest")).build();
 
+	}
+	
+	@Override
+	protected void addViewControllers(ViewControllerRegistry registry) {
+		registry.addRedirectViewController("/", "/swagger-ui.html");
+		super.addViewControllers(registry);
 	}
 	
 	@Override
