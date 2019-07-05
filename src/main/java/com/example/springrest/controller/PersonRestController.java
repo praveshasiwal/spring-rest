@@ -22,7 +22,7 @@ public class PersonRestController {
 	@Autowired
 	private PersonService personService;
 	
-	@GetMapping
+	@GetMapping(value = "{id}")
 	public Person getPerson(@PathVariable Long id) {
 		return personService.getPerson(id);
 	}
@@ -37,7 +37,7 @@ public class PersonRestController {
 		return personService.save(person);
 	}
 	
-	@PutMapping
+	@PutMapping(value = "{id}")
 	public Person updatePerson(@PathVariable Long id, @RequestBody Person person) {
 		if(null != person.getId() && id == person.getId())
 			return personService.update(person);
@@ -49,7 +49,7 @@ public class PersonRestController {
 		}
 	}
 	
-	@DeleteMapping
+	@DeleteMapping(value = "{id}")
 	public Boolean deletePerson(@PathVariable Long id) {
 		return personService.delete(id);
 	}
