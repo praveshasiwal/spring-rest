@@ -3,6 +3,7 @@ package com.example.springrest.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,13 +17,13 @@ import com.example.springrest.model.Person;
 import com.example.springrest.service.PersonService;
 
 @RestController
-@RequestMapping(value = "")
+@RequestMapping(value = "person", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE )
 public class PersonRestController {
 	
 	@Autowired
 	private PersonService personService;
 	
-	@GetMapping(value = "{id}")
+	@GetMapping(value = "/{id}")
 	public Person getPerson(@PathVariable Long id) {
 		return personService.getPerson(id);
 	}
@@ -37,7 +38,7 @@ public class PersonRestController {
 		return personService.save(person);
 	}
 	
-	@PutMapping(value = "{id}")
+	@PutMapping(value = "/{id}")
 	public Person updatePerson(@PathVariable Long id, @RequestBody Person person) {
 		if(null != person.getId() && id == person.getId())
 			return personService.update(person);
@@ -49,7 +50,7 @@ public class PersonRestController {
 		}
 	}
 	
-	@DeleteMapping(value = "{id}")
+	@DeleteMapping(value = "/{id}")
 	public Boolean deletePerson(@PathVariable Long id) {
 		return personService.delete(id);
 	}
