@@ -38,7 +38,7 @@ public class PersonRestController {
 		return personService.save(person);
 	}
 	
-	@PutMapping(value = "/{id}")
+	@PutMapping(value = "/raj/{id}")
 	public Person updatePerson(@PathVariable Long id, @RequestBody Person person) {
 		if(null != person.getId() && id == person.getId())
 			return personService.update(person);
